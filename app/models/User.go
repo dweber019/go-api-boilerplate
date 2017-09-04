@@ -2,9 +2,8 @@ package models
 
 import (
 	"errors"
-	"time"
 
-	"github.com/w3tecch/go-api-boilerplate/app/config"
+	"github.com/dweber019/go-api-boilerplate/app/config"
 )
 
 // User ...
@@ -17,9 +16,6 @@ type User struct {
 	// lib.BaseModel
 
 	ID        int        `json:"id" gorm:"primary_key"`
-	CreatedAt *time.Time `json:"createdAt, omitempty"`
-	UpdatedAt *time.Time `json:"updatedAt, omitempty"`
-	DeletedAt *time.Time `json:"deletedAt, omitempty" sql:"index"`
 
 	FirstName string `json:"firstname, omitempty" gorm:"not null; type:varchar(100)"`
 	LastName  string `json:"lastname, omitempty" gorm:"not null; type:varchar(100)"`

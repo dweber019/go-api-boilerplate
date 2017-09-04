@@ -9,9 +9,9 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 
-	"github.com/w3tecch/go-api-boilerplate/app"
-	"github.com/w3tecch/go-api-boilerplate/app/config"
-	"github.com/w3tecch/go-api-boilerplate/app/models"
+	"github.com/dweber019/go-api-boilerplate/app"
+	"github.com/dweber019/go-api-boilerplate/app/config"
+	"github.com/dweber019/go-api-boilerplate/app/models"
 )
 
 func main() {

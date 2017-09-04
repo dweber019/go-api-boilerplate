@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/w3tecch/go-api-boilerplate/app/lib"
+	"github.com/dweber019/go-api-boilerplate/app/lib"
 )
 
 // APIInfo ...

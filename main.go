@@ -53,6 +53,6 @@ func migrateDatabase() {
 	db := config.GetDatabaseConnection()
 
 	// Migrate the given tables
-	db.AutoMigrate(&models.User{})
+	db.AutoMigrate(&models.User{}, &models.Slip{}, &models.Item{}, &models.SlipHasItem{}, &models.UserHasUser{})
 
 }

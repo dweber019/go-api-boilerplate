@@ -11,6 +11,7 @@ func NewRouter() *mux.Router {
 	//Create main router
 	mainRouter := mux.NewRouter().StrictSlash(true)
 	mainRouter.KeepContext = true
+	apiRouter := mainRouter.PathPrefix("/api").Subrouter()
 
 	/**
 	 * meta-data
@@ -21,11 +22,16 @@ func NewRouter() *mux.Router {
 	 * /users
 	 */
 	// usersRouter.HandleFunc("/", l.Use(c.GetAllUsersHandler, m.SaySomething())).Methods("GET")
-	mainRouter.Methods("GET").Path("/api/users").HandlerFunc(ctrl.GetAllUsersHandler)
-	mainRouter.Methods("POST").Path("/api/users").HandlerFunc(ctrl.CreateUserHandler)
-	mainRouter.Methods("GET").Path("/api/users/{id}").HandlerFunc(ctrl.GetUserByIdHandler)
-	mainRouter.Methods("PUT").Path("/api/users/{id}").HandlerFunc(ctrl.UpdateUserHandler)
-	mainRouter.Methods("DELETE").Path("/api/users/{id}").HandlerFunc(ctrl.DeleteUserHandler)
+	apiRouter.Methods("GET").Path("/users").HandlerFunc(ctrl.GetAllUsersHandler)
+	apiRouter.Methods("POST").Path("/users").HandlerFunc(ctrl.CreateUserHandler)
+	apiRouter.Methods("GET").Path("/users/{id}").HandlerFunc(ctrl.GetUserByIdHandler)
+	apiRouter.Methods("PUT").Path("/users/{id}").HandlerFunc(ctrl.UpdateUserHandler)
+	apiRouter.Methods("DELETE").Path("/users/{id}").HandlerFunc(ctrl.DeleteUserHandler)
+
+	/**
+	 * /items
+	 */
+	apiRouter.Methods("GET").Path("/items").HandlerFunc(ctrl.GetAllItemsHandler)
 
 	return mainRouter
 }

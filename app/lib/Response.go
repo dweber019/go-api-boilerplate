@@ -30,6 +30,13 @@ func (r *Response) SendNoContent() {
 	encodeJSON(r.ResponseWriter, nil)
 }
 
+// SendDeleted ...
+func (r *Response) SendDeleted(body interface{}) {
+	setJSON(r.ResponseWriter)
+	setHTTPStatus(r.ResponseWriter, http.StatusNoContent)
+	encodeJSON(r.ResponseWriter, body)
+}
+
 // SendBadRequest ...
 func (r *Response) SendBadRequest(message string) {
 	http.Error(r.ResponseWriter, message, http.StatusBadRequest)

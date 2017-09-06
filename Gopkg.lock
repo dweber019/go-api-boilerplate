@@ -50,6 +50,12 @@
   version = "v1.1"
 
 [[projects]]
+  name = "github.com/mattes/migrate"
+  packages = [".","database","database/mysql","source","source/file"]
+  revision = "035c07716cd373d88456ec4d701402df52584cb4"
+  version = "v3.0.1"
+
+[[projects]]
   branch = "master"
   name = "github.com/meatballhat/negroni-logrus"
   packages = ["."]
@@ -100,6 +106,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "138002eeadc39da827cbe42787f82b57d7ec479bf5df526de18cefab63e413f3"
+  inputs-digest = "84df81f27cee50fd3270c733c47408c3f5edae7eab7c8d92dbe07908d5dac0e6"
   solver-name = "gps-cdcl"
   solver-version = 1

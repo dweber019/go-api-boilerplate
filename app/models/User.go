@@ -2,32 +2,27 @@ package models
 
 import (
 	"errors"
+	"crypto/md5"
+	"encoding/hex"
 
 	"github.com/dweber019/go-api-boilerplate/app/config"
 )
 
-// User ...
 type User struct {
-	// We could use this templates, but this does not work with this
-	// user := models.User{
-	// 	ID: id,
-	// }
-	// gorm.Model `json:"-"`
-	// lib.BaseModel
-
-	ID        int        `json:"id" gorm:"primary_key"`
-
-	FirstName string `json:"firstname, omitempty" gorm:"not null; type:varchar(100)"`
-	LastName  string `json:"lastname, omitempty" gorm:"not null; type:varchar(100)"`
-	Email     string `json:"email, omitempty" gorm:"not null; type:varchar(100)"`
+	ID        int			`json:"id" gorm:"primary_key; AUTO_INCREMENT"`
+	Username	string	`json:"username, omitempty" gorm:"not null; type:varchar(100)"`
+	Password  string	`json:"password" gorm:"not null; size:512"`
 }
 
-// TableName set User's table name to be `profiles`
+func (u *User) SetPassword(p string) {
+	hash := md5.Sum([]byte(p))
+	u.Password = hex.EncodeToString(hash[:])
+}
+
 func (User) TableName() string {
-	return "users"
+	return "user"
 }
 
-// FetchAll ...
 func (u *User) FetchAll() []User {
 	db := config.GetDatabaseConnection()
 
@@ -37,7 +32,6 @@ func (u *User) FetchAll() []User {
 	return users
 }
 
-// FetchById ...
 func (u *User) FetchById() error {
 	db := config.GetDatabaseConnection()
 
@@ -48,23 +42,6 @@ func (u *User) FetchById() error {
 	return nil
 }
 
-// // Create ...
-// func (u *User) Create() error {
-// 	db := config.GetDatabaseConnection()
-
-// 	// Validate record
-// 	if !db.NewRecord(u) { // => returns `true` as primary key is blank
-// 		return errors.New("New records can not have primary key id")
-// 	}
-
-// 	if err := db.Create(&u).Error; err != nil {
-// 		return errors.New("Could not create user")
-// 	}
-
-// 	return nil
-// }
-
-// Save ...
 func (u *User) Save() error {
 	db := config.GetDatabaseConnection()
 
@@ -81,7 +58,6 @@ func (u *User) Save() error {
 	return nil
 }
 
-// Delete ...
 func (u *User) Delete() error {
 	db := config.GetDatabaseConnection()
 
